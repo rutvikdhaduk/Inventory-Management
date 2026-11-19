@@ -1,0 +1,145 @@
+<main class="billing-page">
+  <header class="page-header">
+    <div>
+      <p class="eyebrow">Daily selling</p>
+      <h1>Generate bill</h1>
+      <p class="page-subtitle">Create a new customer invoice for today's sale.</p>
+    </div>
+    <div class="date-badge">
+      <svg viewBox="0 0 24 24" aria-hidden="true">
+        <rect x="3" y="5" width="18" height="16" rx="2"></rect>
+        <path d="M16 3v4M8 3v4M3 10h18"></path>
+      </svg>
+      19 Nov 2026
+    </div>
+  </header>
+
+  <section class="billing-layout">
+    <div class="invoice-card">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">Invoice details</p>
+          <h2>Bill items</h2>
+        </div>
+        <span class="invoice-number"># INV-0024</span>
+      </div>
+
+      <div class="customer-fields">
+        <label class="field">
+          <span>Customer name</span>
+          <input type="text" placeholder="Enter customer name">
+        </label>
+        <label class="field">
+          <span>Phone number <small>(optional)</small></span>
+          <input type="tel" placeholder="Enter phone number">
+        </label>
+      </div>
+
+      <div class="items-heading">
+        <h3>Items</h3>
+        <button type="button" class="add-item-button">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M12 5v14M5 12h14"></path>
+          </svg>
+          Add item
+        </button>
+      </div>
+
+      <div class="bill-table-wrap">
+        <table class="bill-table">
+          <thead>
+            <tr>
+              <th>Item</th>
+              <th>Qty.</th>
+              <th>Price</th>
+              <th>Total</th>
+              <th><span class="visually-hidden">Remove</span></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>
+                <div class="product-cell">
+                  <span class="product-icon">R</span>
+                  <span>Rice <small>5 kg bag</small></span>
+                </div>
+              </td>
+              <td><input class="qty-input" type="number" value="2" min="1"></td>
+              <td>₹ 55.00</td>
+              <td class="total-cell">₹ 110.00</td>
+              <td>
+                <button type="button" class="remove-button" aria-label="Remove Rice">
+                  <svg viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M5 7h14M10 7V4h4v3M8 7l1 13h6l1-13"></path>
+                  </svg>
+                </button>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <div class="product-cell">
+                  <span class="product-icon blue">S</span>
+                  <span>Sugar <small>1 kg packet</small></span>
+                </div>
+              </td>
+              <td><input class="qty-input" type="number" value="1" min="1"></td>
+              <td>₹ 50.00</td>
+              <td class="total-cell">₹ 50.00</td>
+              <td>
+                <button type="button" class="remove-button" aria-label="Remove Sugar">
+                  <svg viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M5 7h14M10 7V4h4v3M8 7l1 13h6l1-13"></path>
+                  </svg>
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <button type="button" class="add-row-button">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M12 5v14M5 12h14"></path>
+        </svg>
+        Add another item
+      </button>
+    </div>
+
+    <aside class="summary-card">
+      <div class="summary-heading">
+        <h2>Bill summary</h2>
+        <span>2 items</span>
+      </div>
+
+      <div class="summary-lines">
+        <div><span>Subtotal</span><strong>₹ 160.00</strong></div>
+        <div><span>Discount</span><button type="button" class="discount-link">Add discount</button></div>
+      </div>
+
+      <div class="grand-total">
+        <span>Total amount</span>
+        <strong>₹ 160.00</strong>
+      </div>
+
+      <label class="field payment-field">
+        <span>Payment method</span>
+        <select>
+          <option>Cash</option>
+          <option>UPI</option>
+          <option>Card</option>
+          <option>Pending</option>
+        </select>
+        <small class="payment-help">Choose Baki when the customer will pay later.</small>
+      </label>
+
+      <button type="button" class="generate-button">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M6 3h12v18l-3-2-3 2-3-2-3 2V3Z"></path>
+          <path d="M9 8h6M9 12h6"></path>
+        </svg>
+        Generate bill
+      </button>
+      <button type="button" class="clear-button">Clear all</button>
+    </aside>
+  </section>
+</main>

@@ -1,0 +1,139 @@
+<main class="inventory-page">
+  <section class="inventory-card">
+    <header class="inventory-header">
+      <div>
+        <p class="eyebrow">Inventory</p>
+        <h1>Items</h1>
+      </div>
+      <button type="button" class="add-button" (click)="openAdd()">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M12 5v14M5 12h14"></path>
+        </svg>
+        Add item
+      </button>
+    </header>
+
+    <div class="toolbar">
+      <label class="search-box">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <circle cx="11" cy="11" r="6"></circle>
+          <path d="m16 16 4 4"></path>
+        </svg>
+        <input
+          type="search"
+          [(ngModel)]="searchText"
+          placeholder="Search items"
+          aria-label="Search items">
+      </label>
+      <span class="item-count">{{ filteredItems.length }} items</span>
+    </div>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Item name</th>
+            <th>Quantity</th>
+            <th>Price</th>
+            <th>Selling price</th>
+            <th>Packaging</th>
+            <th class="actions-heading">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of filteredItems">
+            <td>
+              <div class="item-name">
+                <span class="item-icon" aria-hidden="true">
+                  {{ item.name?.charAt(0)?.toUpperCase() }}
+                </span>
+                <strong>{{ item.name }}</strong>
+              </div>
+            </td>
+            <td>{{ item.quantity }}</td>
+            <td>{{ item.price | number:'1.2-2' }}</td>
+            <td>{{ item.sellingPrice | number:'1.2-2' }}</td>
+            <td>{{ item.pakagingType || '-' }}</td>
+            <td>
+              <div class="actions">
+                <button type="button" class="icon-button edit" (click)="openEdit(item)" [attr.aria-label]="'Edit ' + item.name">
+                  <svg viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M13.5 6.5 17.5 10.5M4 20l4.5-1 10-10a2.8 2.8 0 0 0-4-4l-10 10L4 20Z"></path>
+                  </svg>
+                </button>
+                <button type="button" class="icon-button delete" (click)="openDelete(item)" [attr.aria-label]="'Delete ' + item.name">
+                  <svg viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M4 7h16M9 7V4h6v3M7 7l1 13h8l1-13M10 11v5M14 11v5"></path>
+                  </svg>
+                </button>
+              </div>
+            </td>
+          </tr>
+          <tr *ngIf="filteredItems.length === 0">
+            <td colspan="6" class="empty-state">No inventory items found.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+</main>
+
+<div class="modal-backdrop" *ngIf="isFormOpen" (click)="closeForm()">
+  <section class="modal" role="dialog" aria-modal="true" aria-labelledby="item-form-title" (click)="$event.stopPropagation()">
+    <header class="modal-header">
+      <div>
+        <p class="eyebrow">{{ isEditing ? 'Update inventory' : 'New inventory' }}</p>
+        <h2 id="item-form-title">{{ isEditing ? 'Edit item' : 'Add item' }}</h2>
+      </div>
+      <button type="button" class="close-button" (click)="closeForm()" aria-label="Close">×</button>
+    </header>
+
+    <form class="item-form" (ngSubmit)="saveItem()">
+      <label class="field field-full">
+        <span>Item name</span>
+        <input type="text" [(ngModel)]="formItem.name" name="name" placeholder="Enter item name" required>
+      </label>
+
+      <label class="field">
+        <span>Quantity</span>
+        <input type="number" [(ngModel)]="formItem.quantity" name="quantity" min="0" placeholder="0">
+      </label>
+
+      <label class="field">
+        <span>Packaging type</span>
+        <input type="text" [(ngModel)]="formItem.pakagingType" name="pakagingType" placeholder="1 kg packet">
+      </label>
+
+      <label class="field">
+        <span>Price</span>
+        <input type="number" [(ngModel)]="formItem.price" name="price" min="0" step="0.01" placeholder="0.00">
+      </label>
+
+      <label class="field">
+        <span>Selling price</span>
+        <input type="number" [(ngModel)]="formItem.sellingPrice" name="sellingPrice" min="0" step="0.01" placeholder="0.00">
+      </label>
+
+      <div class="modal-actions field-full">
+        <button type="button" class="secondary-button" (click)="closeForm()">Cancel</button>
+        <button type="submit" class="save-button">{{ isEditing ? 'Update item' : 'Add item' }}</button>
+      </div>
+    </form>
+  </section>
+</div>
+
+<div class="modal-backdrop" *ngIf="isDeleteOpen" (click)="closeDelete()">
+  <section class="delete-modal" role="dialog" aria-modal="true" aria-labelledby="delete-title" (click)="$event.stopPropagation()">
+    <div class="delete-icon" aria-hidden="true">
+      <svg viewBox="0 0 24 24">
+        <path d="M4 7h16M9 7V4h6v3M7 7l1 13h8l1-13M10 11v5M14 11v5"></path>
+      </svg>
+    </div>
+    <h2 id="delete-title">Delete item?</h2>
+    <p>Are you sure you want to delete <strong>{{ itemToDelete?.name }}</strong>?</p>
+    <div class="modal-actions">
+      <button type="button" class="secondary-button" (click)="closeDelete()">Cancel</button>
+      <button type="button" class="delete-button" (click)="confirmDelete()">Delete</button>
+    </div>
+  </section>
+</div>

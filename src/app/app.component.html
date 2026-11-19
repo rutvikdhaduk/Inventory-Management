@@ -1,0 +1,6 @@
+<div class="app-shell" [class.login-shell]="isLoginPage">
+  <app-sidebar *ngIf="!isLoginPage"></app-sidebar>
+  <main class="app-content">
+    <router-outlet></router-outlet>
+  </main>
+</div>

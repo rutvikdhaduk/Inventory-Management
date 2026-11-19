@@ -1,0 +1,29 @@
+<aside class="sidebar">
+  <div class="brand">
+    <div class="brand-mark" aria-hidden="true">
+      <svg viewBox="0 0 24 24">
+        <path d="M4 7.5 12 3l8 4.5-8 4.5-8-4.5Z"></path>
+        <path d="m4 12 8 4.5 8-4.5M4 16.5l8 4.5 8-4.5"></path>
+      </svg>
+    </div>
+    <span>Inventory</span>
+  </div>
+
+  <nav class="menu" aria-label="Main navigation">
+    <a routerLink="/item" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+      <svg viewBox="0 0 24 24" aria-hidden="true">
+        <rect x="3" y="4" width="18" height="16" rx="2"></rect>
+        <path d="M7 8h4M7 12h10M7 16h7"></path>
+      </svg>
+      <span>Item</span>
+    </a>
+
+    <a routerLink="/stock/daily-selling" routerLinkActive="active">
+      <svg viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M4 7.5 12 3l8 4.5v9L12 21l-8-4.5v-9Z"></path>
+        <path d="m4 7.5 8 4.5 8-4.5M12 12v9"></path>
+      </svg>
+      <span>Daily Selling</span>
+    </a>
+  </nav>
+</aside>
